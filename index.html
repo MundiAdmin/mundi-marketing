@@ -3,468 +3,654 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mundi Education &mdash; One event. Every subject. Real understanding.</title>
-<meta name="description" content="Mundi Education teaches one event across every subject simultaneously &mdash; building the cross-disciplinary understanding that modern education fails to develop.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Syne:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>Mundi — Think harder. See further.</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --ink:#0D1B2A; --deep:#060e18; --teal:#0B7A75; --tealb:#14B8A6;
+  --teall:#5EEAD4; --tealp:rgba(20,184,166,.08); --white:#fff;
+  --slate:#64748B; --slatel:#94A3B8; --amber:#D97706; --amberl:#FCD34D;
+  --violet:#7C3AED; --violetl:#a78bfa; --violetp:rgba(124,58,237,.1);
+  --border:rgba(255,255,255,.07); --card:rgba(255,255,255,.03);
+}
+html{scroll-behavior:smooth;}
+body{font-family:'Syne',sans-serif;background:var(--ink);color:var(--white);overflow-x:hidden;}
 
-:root {
-  --ink:       #0D1B2A;
-  --ink-mid:   #0F2236;
-  --ink-light: #1E3347;
-  --teal-dark: #0B7A75;
-  --teal:      #14B8A6;
-  --teal-lt:   #5EEAD4;
-  --sand:      #FAF8F4;
-  --white:     #FFFFFF;
-  --slate:     #94A3B8;
-  --muted:     #3E5268;
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  height:60px;display:flex;align-items:center;justify-content:space-between;
+  padding:0 40px;
+  background:rgba(9,20,33,0);
+  transition:background .4s,border-color .4s;
+}
+nav.scrolled{
+  background:rgba(9,20,33,.95);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{font-size:18px;font-weight:800;letter-spacing:.1em;color:var(--white);}
+.nav-logo span{color:var(--tealb);}
+.nav-links{display:flex;align-items:center;gap:32px;}
+.nav-links a{font-size:13px;font-weight:600;color:var(--slatel);text-decoration:none;transition:.2s;letter-spacing:.02em;}
+.nav-links a:hover{color:var(--white);}
+.nav-cta{
+  padding:8px 20px;background:var(--teal);border:none;border-radius:6px;
+  font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--white);
+  cursor:pointer;transition:.2s;text-decoration:none;
+}
+.nav-cta:hover{background:var(--tealb);}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:120px 40px 80px;
+  position:relative;overflow:hidden;text-align:center;
 }
 
-html { scroll-behavior: smooth; }
-
-body {
-  background: var(--ink);
-  color: var(--white);
-  font-family: 'Syne', sans-serif;
-  font-size: 16px;
-  line-height: 1.7;
-  -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
+/* ripple background animation */
+.hero::before{
+  content:'';position:absolute;
+  width:600px;height:600px;border-radius:50%;
+  border:1px solid rgba(20,184,166,.08);
+  top:50%;left:50%;transform:translate(-50%,-50%);
+  animation:ripple1 8s ease-in-out infinite;
+}
+.hero::after{
+  content:'';position:absolute;
+  width:900px;height:900px;border-radius:50%;
+  border:1px solid rgba(20,184,166,.05);
+  top:50%;left:50%;transform:translate(-50%,-50%);
+  animation:ripple1 8s ease-in-out infinite .5s;
+}
+@keyframes ripple1{
+  0%,100%{transform:translate(-50%,-50%) scale(1);}
+  50%{transform:translate(-50%,-50%) scale(1.06);}
+}
+.hero-ring{
+  position:absolute;width:1200px;height:1200px;border-radius:50%;
+  border:1px solid rgba(20,184,166,.03);
+  top:50%;left:50%;transform:translate(-50%,-50%);
+  animation:ripple1 8s ease-in-out infinite 1s;
 }
 
-/* NAV */
-nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 200;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1.4rem 4rem;
-  border-bottom: 1px solid rgba(255,255,255,0.06);
-  background: rgba(13,27,42,0.97);
-  backdrop-filter: blur(20px);
+.hero-inner{position:relative;z-index:1;max-width:800px;}
+
+.hero-tag{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:6px 14px;border-radius:20px;
+  background:var(--tealp);border:1px solid rgba(20,184,166,.2);
+  font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--tealb);margin-bottom:36px;
 }
-.nav-logo { display: flex; flex-direction: column; line-height: 1.15; }
-.nav-logo .m { color: var(--teal); font-weight: 700; font-size: 0.85rem; letter-spacing: 0.2em; text-transform: uppercase; }
-.nav-logo .e { color: rgba(255,255,255,0.4); font-weight: 400; font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase; }
-.nav-links { display: flex; gap: 3rem; list-style: none; }
-.nav-links a { color: var(--slate); text-decoration: none; font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600; transition: color 0.2s; display: flex; flex-direction: column; line-height: 1.3; }
-.nav-links a:hover { color: var(--white); }
-.nav-cta { border: 1px solid var(--teal); color: var(--teal); padding: 0.6rem 1.6rem; font-family: 'Syne', sans-serif; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; transition: all 0.2s; }
-.nav-cta:hover { background: var(--teal); color: var(--ink); }
+.hero-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--tealb);animation:blink 2s infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
 
-/* HERO */
-#hero {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 10rem 4rem 5rem;
-  max-width: 1400px;
-  margin: 0 auto;
-  border-bottom: 1px solid var(--ink-light);
+h1.hero-h{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(48px,8vw,88px);
+  font-weight:300;line-height:1.05;
+  letter-spacing:-.01em;
+  margin-bottom:28px;
 }
-.hero-kicker { display: flex; align-items: center; gap: 1rem; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.28em; text-transform: uppercase; color: var(--teal); margin-bottom: 3rem; }
-.hero-kicker::before { content: ''; display: block; width: 36px; height: 1px; background: var(--teal); }
-h1.hero-hed { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(5rem, 11vw, 11rem); line-height: 0.93; letter-spacing: -0.025em; margin-bottom: 4rem; }
-h1.hero-hed .accent { color: var(--teal); font-style: italic; }
-.hero-foot { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: end; padding-top: 3rem; border-top: 1px solid var(--ink-light); }
-.hero-desc { font-size: 1.05rem; color: var(--slate); line-height: 1.9; max-width: 480px; }
-.hero-cta-wrap { display: flex; flex-direction: column; align-items: flex-end; gap: 1rem; }
-.btn-primary { display: inline-block; background: var(--teal); color: var(--ink); padding: 1.1rem 2.8rem; font-family: 'Syne', sans-serif; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; transition: background 0.2s, transform 0.2s; }
-.btn-primary:hover { background: var(--teal-lt); transform: translateY(-2px); }
-.hero-small { font-size: 0.7rem; color: var(--muted); letter-spacing: 0.06em; }
+h1.hero-h em{font-style:italic;color:var(--teall);}
 
-/* TICKER */
-.ticker { overflow: hidden; border-top: 1px solid var(--ink-light); border-bottom: 1px solid var(--ink-light); background: var(--ink-mid); padding: 0.9rem 0; }
-.ticker-track { display: flex; width: max-content; animation: ticker 28s linear infinite; }
-.ticker-item { padding: 0 2.5rem; font-size: 0.65rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); border-right: 1px solid var(--ink-light); white-space: nowrap; }
-.ticker-item .dot { color: var(--teal); margin-right: 0.8rem; }
-@keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-
-/* SHARED SECTION */
-.sw { max-width: 1400px; margin: 0 auto; padding: 7rem 4rem; }
-.eyebrow { display: flex; align-items: center; gap: 1rem; font-size: 0.65rem; font-weight: 600; letter-spacing: 0.28em; text-transform: uppercase; color: var(--teal); margin-bottom: 2.5rem; }
-.eyebrow::before { content: ''; display: block; width: 28px; height: 1px; background: var(--teal); }
-h2.sh { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: clamp(2.5rem, 4.5vw, 4rem); line-height: 1.1; letter-spacing: -0.01em; max-width: 820px; margin-bottom: 1.75rem; }
-p.sb { font-size: 1rem; color: var(--slate); line-height: 1.9; max-width: 620px; margin-bottom: 1.4rem; }
-hr.rule { border: none; border-top: 1px solid var(--ink-light); }
-
-/* PROBLEM */
-#problem { background: var(--ink); }
-.prob-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--ink-light); margin-top: 4rem; }
-.prob-card { background: var(--ink-mid); padding: 2.5rem 2.2rem; border-top: 2px solid var(--teal-dark); transition: border-color 0.3s; }
-.prob-card:hover { border-top-color: var(--teal); }
-.prob-n { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: 3.5rem; color: var(--teal); opacity: 0.2; line-height: 1; margin-bottom: 1.5rem; }
-.prob-title { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 1.5rem; margin-bottom: 1rem; }
-.prob-body { font-size: 0.875rem; color: var(--slate); line-height: 1.85; }
-
-/* RIPPLE */
-#ripple { background: var(--ink-mid); border-top: 1px solid var(--ink-light); border-bottom: 1px solid var(--ink-light); }
-.ripple-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 7rem; align-items: start; }
-.ripple-anim { display: flex; align-items: center; justify-content: center; height: 340px; position: relative; }
-.ring { position: absolute; border-radius: 50%; border: 1px solid var(--teal); animation: expand 3.2s ease-out infinite; }
-.ring:nth-child(1) { width:52px;  height:52px;  animation-delay:0s; }
-.ring:nth-child(2) { width:110px; height:110px; animation-delay:0.7s; }
-.ring:nth-child(3) { width:180px; height:180px; animation-delay:1.4s; }
-.ring:nth-child(4) { width:260px; height:260px; animation-delay:2.1s; }
-@keyframes expand { 0%{transform:scale(0.7);opacity:0} 25%{opacity:0.6} 100%{transform:scale(1.15);opacity:0} }
-.ring-core { width:28px; height:28px; background:var(--teal); border-radius:50%; box-shadow:0 0 32px rgba(20,184,166,0.5); z-index:1; }
-.sf { position:absolute; font-size:0.6rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--teal-lt); opacity:0.65; }
-.sf-t  { top:6%;    left:50%; transform:translateX(-50%); }
-.sf-tr { top:18%;   right:4%; }
-.sf-br { bottom:18%;right:4%; }
-.sf-b  { bottom:6%; left:50%; transform:translateX(-50%); }
-.sf-bl { bottom:18%;left:4%; }
-.sf-tl { top:18%;   left:4%; }
-.feat-grid { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--ink-light); margin-top:2rem; }
-.feat { background:var(--ink); padding:1.8rem; border-top:1px solid var(--teal-dark); transition:background 0.2s; }
-.feat:hover { background:#0c1e2e; }
-.feat-title { font-size:0.7rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--teal-lt); margin-bottom:0.6rem; }
-.feat-body  { font-size:0.82rem; color:var(--slate); line-height:1.8; }
-
-/* HOW */
-#how { background:var(--ink); }
-.steps { margin-top:4.5rem; }
-.step { display:grid; grid-template-columns:5rem 1fr; gap:3.5rem; padding:3.5rem 0; border-top:1px solid var(--ink-light); align-items:start; }
-.step:last-child { border-bottom:1px solid var(--ink-light); }
-.step-n { font-family:'Cormorant Garamond',serif; font-weight:300; font-size:4rem; color:var(--teal); opacity:0.25; line-height:1; }
-.step-title { font-family:'Cormorant Garamond',serif; font-weight:600; font-size:1.7rem; margin-bottom:0.7rem; }
-.step-body  { font-size:0.9rem; color:var(--slate); line-height:1.9; max-width:600px; }
-
-/* AUDIENCES */
-#audiences { background:var(--ink-mid); border-top:1px solid var(--ink-light); border-bottom:1px solid var(--ink-light); }
-.aud-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--ink-light); margin-top:4rem; }
-.aud-card { background:var(--ink); padding:2.8rem 2.2rem; border-top:2px solid transparent; }
-.aud-card:nth-child(1) { border-top-color:var(--teal-dark); }
-.aud-card:nth-child(2) { border-top-color:var(--teal); }
-.aud-card:nth-child(3) { border-top-color:var(--teal-lt); }
-.aud-who  { font-size:0.65rem; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--teal); margin-bottom:1.2rem; }
-.aud-title { font-family:'Cormorant Garamond',serif; font-weight:600; font-size:1.6rem; margin-bottom:1rem; }
-.aud-body  { font-size:0.875rem; color:var(--slate); line-height:1.85; margin-bottom:1.5rem; }
-.aud-says  { border-top:1px solid var(--ink-light); padding-top:1.4rem; font-size:0.62rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); }
-.aud-says span { display:block; color:var(--white); font-size:1.15rem; font-weight:300; letter-spacing:0; text-transform:none; margin-top:0.6rem; font-family:'Cormorant Garamond',serif; font-style:italic; line-height:1.4; opacity:0.85; }
-
-/* MISSION */
-#mission { background:var(--ink); }
-.mission-layout { display:grid; grid-template-columns:1fr 1fr; gap:8rem; align-items:start; }
-blockquote.pull { font-family:'Cormorant Garamond',serif; font-weight:300; font-style:italic; font-size:clamp(1.8rem,2.8vw,2.8rem); line-height:1.35; border-left:2px solid var(--teal); padding-left:2.5rem; color:var(--white); margin-top:1rem; }
-.attr { font-size:0.68rem; font-weight:600; letter-spacing:0.16em; text-transform:uppercase; color:var(--teal); padding-left:2.5rem; margin-top:2rem; }
-
-/* CTA */
-#prototype { background:var(--ink-mid); border-top:1px solid var(--ink-light); }
-.cta-layout { display:grid; grid-template-columns:1fr 1fr; gap:8rem; align-items:center; padding:8rem 4rem; max-width:1400px; margin:0 auto; }
-.cta-hed { font-family:'Cormorant Garamond',serif; font-weight:300; font-size:clamp(3.5rem,6vw,6.5rem); line-height:0.95; letter-spacing:-0.025em; }
-.cta-hed em { color:var(--teal); font-style:italic; }
-.btn-large { display:block; background:var(--teal); color:var(--ink); padding:1.4rem 2.5rem; font-family:'Syne',sans-serif; font-size:0.85rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; text-decoration:none; text-align:center; transition:background 0.2s,transform 0.2s; margin-bottom:1.5rem; }
-.btn-large:hover { background:var(--teal-lt); transform:translateY(-2px); }
-.cta-points { list-style:none; display:flex; flex-direction:column; gap:0.8rem; }
-.cta-points li { font-size:0.85rem; color:var(--slate); display:flex; gap:0.75rem; align-items:baseline; }
-.cta-points li::before { content:'\2192'; color:var(--teal); font-size:0.7rem; flex-shrink:0; }
-
-/* FOOTER */
-footer { border-top:1px solid var(--ink-light); padding:3rem 4rem; max-width:1400px; margin:0 auto; display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:2rem; }
-.footer-logo { display:flex; flex-direction:column; line-height:1.2; }
-.footer-logo .m { color:var(--teal); font-weight:700; font-size:0.85rem; letter-spacing:0.2em; text-transform:uppercase; }
-.footer-logo .e { color:var(--muted); font-weight:400; font-size:0.72rem; letter-spacing:0.22em; text-transform:uppercase; }
-.footer-links { display:flex; gap:2.5rem; list-style:none; }
-.footer-links a { color:var(--muted); text-decoration:none; font-size:0.7rem; letter-spacing:0.08em; text-transform:uppercase; transition:color 0.2s; }
-.footer-links a:hover { color:var(--teal); }
-.footer-right { text-align:right; font-size:0.75rem; color:var(--muted); line-height:1.7; }
-.footer-right a { color:var(--muted); text-decoration:none; transition:color 0.2s; }
-.footer-right a:hover { color:var(--teal); }
-.footer-copy { grid-column:1/-1; text-align:center; font-size:0.65rem; color:var(--muted); border-top:1px solid var(--ink-light); padding-top:2rem; margin-top:0.5rem; letter-spacing:0.1em; text-transform:uppercase; }
-
-/* RESPONSIVE */
-@media (max-width:960px) {
-  nav { padding:1.2rem 1.5rem; }
-  .nav-links { display:none; }
-  #hero, .sw { padding-left:1.5rem; padding-right:1.5rem; }
-  #hero { padding-top:8rem; }
-  .hero-foot { grid-template-columns:1fr; }
-  .hero-cta-wrap { align-items:flex-start; }
-  .prob-grid, .aud-grid { grid-template-columns:1fr; }
-  .ripple-layout, .mission-layout { grid-template-columns:1fr; gap:3rem; }
-  .cta-layout { grid-template-columns:1fr; gap:3rem; padding:5rem 1.5rem; }
-  footer { grid-template-columns:1fr; text-align:center; padding:2.5rem 1.5rem; }
-  .footer-right { text-align:center; }
-  .footer-links { justify-content:center; }
-  .step { grid-template-columns:3.5rem 1fr; gap:2rem; }
+.hero-sub{
+  font-size:clamp(16px,2vw,20px);font-weight:400;
+  line-height:1.7;color:var(--slatel);
+  max-width:560px;margin:0 auto 48px;
 }
+.hero-sub strong{color:var(--white);font-weight:600;}
+
+.hero-ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:64px;}
+.btn-primary{
+  padding:14px 32px;background:var(--teal);border:none;border-radius:8px;
+  font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:var(--white);
+  cursor:pointer;transition:.2s;text-decoration:none;display:inline-block;
+}
+.btn-primary:hover{background:var(--tealb);transform:translateY(-1px);}
+.btn-ghost{
+  padding:14px 32px;background:none;border:1px solid var(--border);border-radius:8px;
+  font-family:'Syne',sans-serif;font-size:15px;font-weight:600;color:var(--slatel);
+  cursor:pointer;transition:.2s;text-decoration:none;display:inline-block;
+}
+.btn-ghost:hover{border-color:rgba(255,255,255,.2);color:var(--white);}
+
+/* question ticker */
+.question-ticker{
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+}
+.ticker-label{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--slate);margin-bottom:6px;}
+.ticker-q{
+  font-family:'Cormorant Garamond',serif;font-size:clamp(15px,2vw,18px);
+  font-style:italic;color:var(--slatel);
+  animation:tickerFade 6s ease-in-out infinite;
+  min-height:28px;
+}
+@keyframes tickerFade{0%,100%{opacity:0;transform:translateY(4px)}10%,85%{opacity:1;transform:translateY(0)}95%{opacity:0}}
+
+/* ── SCROLL CARET ── */
+.scroll-caret{
+  position:absolute;bottom:32px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+  animation:float 2s ease-in-out infinite;
+}
+@keyframes float{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
+.scroll-caret svg{width:20px;height:20px;color:var(--slate);}
+.scroll-caret span{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--slate);}
+
+/* ── SHARED SECTION ── */
+section{padding:100px 40px;}
+.section-inner{max-width:960px;margin:0 auto;}
+.section-tag{
+  font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--tealb);margin-bottom:16px;
+  display:flex;align-items:center;gap:10px;
+}
+.section-tag::before{content:'';display:block;width:20px;height:1px;background:var(--tealb);}
+.section-h{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(32px,5vw,56px);font-weight:300;line-height:1.2;margin-bottom:20px;
+}
+.section-h em{font-style:italic;color:var(--teall);}
+.section-body{font-size:16px;line-height:1.8;color:var(--slatel);max-width:620px;}
+
+/* ── PROBLEM ── */
+.problem{background:var(--deep);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.problem-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;margin-top:56px;}
+@media(max-width:700px){.problem-grid{grid-template-columns:1fr;gap:40px;}}
+.problem-stats{display:flex;flex-direction:column;gap:28px;}
+.stat-item{padding:24px;background:var(--card);border:1px solid var(--border);border-radius:12px;}
+.stat-num{font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:300;color:var(--tealb);line-height:1;margin-bottom:6px;}
+.stat-label{font-size:14px;color:var(--slatel);line-height:1.6;}
+.stat-label strong{color:var(--white);}
+
+/* ── HOW IT WORKS ── */
+.how-steps{display:flex;flex-direction:column;gap:0;margin-top:56px;}
+.step{
+  display:grid;grid-template-columns:60px 1fr;gap:0;
+  position:relative;
+}
+.step:not(:last-child)::after{
+  content:'';position:absolute;left:28px;top:48px;bottom:-20px;
+  width:1px;background:linear-gradient(to bottom,var(--tealb),rgba(20,184,166,0));
+}
+.step-num{
+  width:56px;height:56px;border-radius:50%;
+  background:var(--tealp);border:1px solid rgba(20,184,166,.25);
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;font-weight:800;color:var(--tealb);
+  flex-shrink:0;margin-top:0;
+}
+.step-content{padding:0 0 48px 28px;}
+.step-title{font-size:18px;font-weight:700;margin-bottom:8px;margin-top:14px;}
+.step-body{font-size:14px;color:var(--slatel);line-height:1.7;max-width:480px;}
+.step-body strong{color:var(--white);}
+
+/* ── QUESTIONS ── */
+.questions{background:var(--deep);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.q-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;margin-top:48px;}
+.q-card{
+  padding:26px;background:var(--card);border:1px solid var(--border);border-radius:12px;
+  transition:border-color .25s,transform .2s;cursor:default;
+}
+.q-card:hover{border-color:rgba(20,184,166,.35);transform:translateY(-2px);}
+.q-topic{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--slatel);margin-bottom:10px;}
+.q-text{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400;line-height:1.35;color:var(--white);margin-bottom:18px;}
+.q-lenses{display:flex;flex-wrap:wrap;gap:6px;}
+.q-lens{font-size:11px;padding:3px 9px;border-radius:20px;background:rgba(255,255,255,.05);border:1px solid var(--border);color:var(--slatel);}
+.q-card.active-card{border-color:rgba(20,184,166,.3);}
+.live-dot{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--tealb);margin-bottom:10px;
+}
+.live-dot::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--tealb);animation:blink 2s infinite;}
+
+/* ── LENSES ── */
+.lenses-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin-top:48px;}
+.lens-tile{
+  padding:20px 18px;background:var(--card);border:1px solid var(--border);border-radius:10px;
+  transition:border-color .2s,background .2s;
+}
+.lens-tile:hover{border-color:rgba(20,184,166,.3);background:rgba(20,184,166,.04);}
+.lens-tile-ico{font-size:24px;margin-bottom:10px;display:block;line-height:1;}
+.lens-tile-nm{font-size:13px;font-weight:700;margin-bottom:4px;}
+.lens-tile-q{font-size:11px;color:var(--slate);line-height:1.5;font-style:italic;}
+
+/* ── RIPPLE SCORE ── */
+.score-section{background:linear-gradient(180deg,var(--ink) 0%,rgba(11,122,117,.08) 100%);}
+.score-inner-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;margin-top:56px;}
+@media(max-width:700px){.score-inner-grid{grid-template-columns:1fr;}}
+.score-graphic{display:flex;justify-content:center;align-items:center;}
+.score-points{display:flex;flex-direction:column;gap:20px;}
+.score-point{display:flex;align-items:flex-start;gap:14px;}
+.score-point-ico{
+  width:36px;height:36px;border-radius:8px;
+  display:flex;align-items:center;justify-content:center;font-size:17px;
+  flex-shrink:0;background:var(--tealp);border:1px solid rgba(20,184,166,.2);
+}
+.score-point-txt strong{font-size:14px;font-weight:700;display:block;margin-bottom:3px;}
+.score-point-txt span{font-size:13px;color:var(--slatel);line-height:1.55;}
+
+/* ── FOR WHO ── */
+.for-who{background:var(--deep);border-top:1px solid var(--border);}
+.who-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px;}
+@media(max-width:640px){.who-grid{grid-template-columns:1fr;}}
+.who-card{padding:24px;background:var(--card);border:1px solid var(--border);border-radius:12px;}
+.who-ico{font-size:28px;margin-bottom:12px;}
+.who-ttl{font-size:15px;font-weight:700;margin-bottom:8px;}
+.who-body{font-size:13px;color:var(--slatel);line-height:1.65;}
+
+/* ── CTA ── */
+.cta-section{
+  text-align:center;padding:120px 40px;
+  background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(11,122,117,.12) 0%,transparent 70%);
+  position:relative;
+}
+.cta-section::before{
+  content:'';position:absolute;inset:0;
+  background:url("data:image/svg+xml,%3Csvg width='40' height='40' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='1' cy='1' r='1' fill='rgba(255,255,255,0.025)'/%3E%3C/svg%3E");
+}
+.cta-inner{position:relative;z-index:1;max-width:640px;margin:0 auto;}
+.cta-h{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,6vw,64px);font-weight:300;line-height:1.1;margin-bottom:20px;}
+.cta-h em{font-style:italic;color:var(--teall);}
+.cta-sub{font-size:16px;color:var(--slatel);line-height:1.7;margin-bottom:44px;}
+.email-form{display:flex;gap:10px;max-width:420px;margin:0 auto 16px;flex-wrap:wrap;}
+.email-form input{
+  flex:1;min-width:200px;padding:13px 16px;
+  background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:8px;
+  font-family:'Syne',sans-serif;font-size:14px;color:var(--white);outline:none;
+  transition:.2s;
+}
+.email-form input::placeholder{color:var(--slate);}
+.email-form input:focus{border-color:rgba(20,184,166,.4);background:rgba(20,184,166,.04);}
+.email-form button{
+  padding:13px 24px;background:var(--teal);border:none;border-radius:8px;
+  font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--white);
+  cursor:pointer;transition:.2s;white-space:nowrap;
+}
+.email-form button:hover{background:var(--tealb);}
+.form-note{font-size:12px;color:var(--slate);}
+
+/* ── FOOTER ── */
+footer{
+  border-top:1px solid var(--border);padding:32px 40px;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;
+}
+.footer-logo{font-size:16px;font-weight:800;letter-spacing:.1em;}
+.footer-logo span{color:var(--tealb);}
+.footer-note{font-size:12px;color:var(--slate);}
+
+/* ── RESPONSIVE ── */
+@media(max-width:600px){
+  nav{padding:0 20px;}
+  section{padding:72px 20px;}
+  .hero{padding:120px 20px 72px;}
+  footer{padding:24px 20px;}
+  .nav-links{display:none;}
+}
+
+/* ── ANIMATIONS ── */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.in{opacity:1;transform:translateY(0);}
 </style>
 </head>
 <body>
 
 <!-- NAV -->
-<nav>
-  <div class="nav-logo">
-    <span class="m">Mundi</span>
-    <span class="e">Education</span>
+<nav id="nav">
+  <div class="nav-logo">MUN<span>D</span>I</div>
+  <div class="nav-links">
+    <a href="#how">How it works</a>
+    <a href="#questions">Questions</a>
+    <a href="#lenses">The lenses</a>
   </div>
-  <ul class="nav-links">
-    <li><a href="#ripple"><span>The</span><span>Platform</span></a></li>
-    <li><a href="#how"><span>How It</span><span>Works</span></a></li>
-    <li><a href="#audiences"><span>Who It's</span><span>For</span></a></li>
-    <li><a href="#mission"><span>The</span><span>Mission</span></a></li>
-  </ul>
-  <a href="https://mundi-prototype.vercel.app/" target="_blank" class="nav-cta">Try the prototype</a>
+  <a href="#waitlist" class="nav-cta">Join the waitlist</a>
 </nav>
 
 <!-- HERO -->
-<section id="hero">
-  <p class="hero-kicker">Ripple Learning&trade; &nbsp;&middot;&nbsp; Everything Connects</p>
-  <h1 class="hero-hed">
-    One event.<br>
-    Every subject.<br>
-    <span class="accent">Real understanding.</span>
-  </h1>
-  <div class="hero-foot">
-    <p class="hero-desc">
-      Subjects have always been taught in isolation. History doesn't talk to Geography. Science doesn't talk to Ethics. Students memorise facts and never understand how the world actually connects.<br><br>
-      Mundi draws the lines.
+<section class="hero">
+  <div class="hero-ring"></div>
+  <div class="hero-inner">
+    <div class="hero-tag">Now in prototype</div>
+    <h1 class="hero-h">
+      Think harder.<br><em>See further.</em>
+    </h1>
+    <p class="hero-sub">
+      Mundi is a critical thinking platform for curious adults.
+      One contested question. <strong>Multiple disciplines.</strong>
+      An AI that challenges your thinking — not your inbox.
     </p>
-    <div class="hero-cta-wrap">
-      <a href="https://mundi-prototype.vercel.app/" target="_blank" class="btn-primary">See it for yourself &rarr;</a>
-      <p class="hero-small">Free to try &nbsp;&middot;&nbsp; No account required &nbsp;&middot;&nbsp; Built with Anthropic AI</p>
+    <div class="hero-ctas">
+      <a href="#waitlist" class="btn-primary">Join the waitlist</a>
+      <a href="https://prototype.mundi.education/app.html" class="btn-ghost">Try a module →</a>
+    </div>
+
+    <div class="question-ticker">
+      <div class="ticker-label">Today's question</div>
+      <div class="ticker-q" id="ticker"></div>
+    </div>
+  </div>
+
+  <div class="scroll-caret">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- THE PROBLEM -->
+<section class="problem" id="problem">
+  <div class="section-inner">
+    <div class="section-tag reveal">The problem</div>
+    <h2 class="section-h reveal">The world is polarised.<br><em>Your feed makes it worse.</em></h2>
+    <p class="section-body reveal">Most of what you read confirms what you already think. Most of what you watch is designed to make you feel certain. Certainty is comfortable. It's also how you stop thinking.<br><br>Mundi is built on a different idea: that <strong>the best thinkers aren't the ones with the most opinions — they're the ones who can see a question from the most angles.</strong></p>
+
+    <div class="problem-grid reveal">
+      <div class="problem-stats">
+        <div class="stat-item">
+          <div class="stat-num">64%</div>
+          <div class="stat-label">of adults say they mostly encounter <strong>news and opinion that confirms their existing views.</strong></div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">6</div>
+          <div class="stat-label">disciplines — economics, history, geography, culture, philosophy, science — <strong>can be applied to any complex question.</strong> Most people never leave their first one.</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">0</div>
+          <div class="stat-label">platforms currently exist that teach you <strong>how to think about hard questions</strong> — rather than telling you what to think.</div>
+        </div>
+      </div>
+      <div>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(24px,3.5vw,34px);font-weight:300;line-height:1.4;color:var(--white);margin-bottom:20px;">"We don't need more information. We need better ways of thinking about the information we already have."</p>
+        <p style="font-size:13px;color:var(--slate);">— The gap Mundi is trying to close</p>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- TICKER -->
-<div class="ticker">
-  <div class="ticker-track">
-    <span class="ticker-item"><span class="dot">&#10022;</span>Ripple Learning&trade;</span>
-    <span class="ticker-item"><span class="dot">&#10022;</span>One event. Every subject.</span>
-    <span class="ticker-item"><span class="dot">&#10022;</span>Ripple Score&trade;</span>
-    <span class="ticker-item"><span class="dot">&#10022;</span>History &middot; Geography &middot; English</span>
-    <span class="ticker-item"><span class="dot">&#10022;</span>Science &middot; Maths &middot; Ethics</span>
-    <span class="ticker-item"><span class="dot">&#10022;</span>The Aha Moment</span>
-    <span class="ticker-item"><span class="dot">&#10022;</span>Cross-Subject Understanding</span>
-    <span class="ticker-item"><span class="dot">&#10022;</span>Connect the Dots</span>
-    <span class="ticker-item"><span class="dot">&#10022;</span>Ripple Learning&trade;</span>
-    <span class="ticker-item"><span class="dot">&#10022;</span>One event. Every subject.</span>
-    <span class="ticker-item"><span class="dot">&#10022;</span>Ripple Score&trade;</span>
-    <span class="ticker-item"><span class="dot">&#10022;</span>History &middot; Geography &middot; English</span>
-    <span class="ticker-item"><span class="dot">&#10022;</span>Science &middot; Maths &middot; Ethics</span>
-    <span class="ticker-item"><span class="dot">&#10022;</span>The Aha Moment</span>
-    <span class="ticker-item"><span class="dot">&#10022;</span>Cross-Subject Understanding</span>
-    <span class="ticker-item"><span class="dot">&#10022;</span>Connect the Dots</span>
-  </div>
-</div>
-
-<!-- PROBLEM -->
-<hr class="rule">
-<div id="problem">
-  <div class="sw">
-    <p class="eyebrow">The Problem</p>
-    <h2 class="sh">Education is taught in silos. Nobody draws the lines between subjects.</h2>
-    <p class="sb">A student studies the Great Flood in History. The same student studies rivers in Geography. The same student reads about displacement in English. Nobody ever tells them these are the same event.</p>
-    <div class="prob-grid">
-      <div class="prob-card">
-        <div class="prob-n">01</div>
-        <div class="prob-title">The Isolation Problem</div>
-        <p class="prob-body">Every subject teaches in its own lane. History, Geography, Science, English &mdash; all studying the same world through separate windows. The connections are real. They're just never made.</p>
-      </div>
-      <div class="prob-card">
-        <div class="prob-n">02</div>
-        <div class="prob-title">Missing the Bigger Picture</div>
-        <p class="prob-body">Students can recall facts but cannot transfer knowledge. They pass exams and leave school unable to explain how the world works. The connections were never made because nobody was paid to make them.</p>
-      </div>
-      <div class="prob-card">
-        <div class="prob-n">03</div>
-        <div class="prob-title">No Data Exists</div>
-        <p class="prob-body">Schools have subject grades. What they have never had &mdash; what has never existed &mdash; is a measurement of how well a student connects knowledge across subjects. The Ripple Score&trade; changes that.</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- RIPPLE -->
-<hr class="rule">
-<div id="ripple">
-  <div class="sw">
-    <div class="ripple-layout">
-      <div>
-        <p class="eyebrow">The Platform</p>
-        <h2 class="sh">One event. Six subjects. Data schools have never had.</h2>
-        <p class="sb">A Ripple Module takes a single real event &mdash; the Mississippi Flood, Chernobyl, the Moon Landing &mdash; and teaches it through every subject at once.</p>
-        <p class="sb">History reveals the cause. Geography reveals the landscape. Science reveals the physics. English reveals the human story. Maths reveals the scale. Ethics reveals the cost.</p>
-        <p class="sb">At the end, every student gets a Ripple Score&trade; &mdash; six subject scores from one event. A cross-curricular understanding profile that has never existed before.</p>
-      </div>
-      <div>
-        <div class="ripple-anim">
-          <div class="ring"></div>
-          <div class="ring"></div>
-          <div class="ring"></div>
-          <div class="ring"></div>
-          <div class="ring-core"></div>
-          <span class="sf sf-t">History</span>
-          <span class="sf sf-tr">Science</span>
-          <span class="sf sf-br">Maths</span>
-          <span class="sf sf-b">English</span>
-          <span class="sf sf-bl">Ethics</span>
-          <span class="sf sf-tl">Geography</span>
-        </div>
-        <div class="feat-grid">
-          <div class="feat">
-            <div class="feat-title">Ripple Modules&trade;</div>
-            <p class="feat-body">One real event. Six subjects. Every task mapped to GCSE Assessment Objectives.</p>
-          </div>
-          <div class="feat">
-            <div class="feat-title">AI Conversation</div>
-            <p class="feat-body">Responds to every student individually. Pushes thinking. Never gives the answer away.</p>
-          </div>
-          <div class="feat">
-            <div class="feat-title">Ripple Score&trade;</div>
-            <p class="feat-body">Six subject scores. One event. The cross-curricular data point that's never existed.</p>
-          </div>
-          <div class="feat">
-            <div class="feat-title">Teacher Dashboard</div>
-            <p class="feat-body">Every student. Every subject. Zero marking. The whole picture, instantly.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
 <!-- HOW IT WORKS -->
-<hr class="rule">
-<div id="how">
-  <div class="sw">
-    <p class="eyebrow">How It Works</p>
-    <h2 class="sh">Three steps. Six subjects. One score.</h2>
-    <div class="steps">
-      <div class="step">
-        <div class="step-n">01</div>
-        <div>
-          <div class="step-title">Choose your Ripple Module</div>
-          <p class="step-body">Select from our library of modules, each built around a single moment that changed history. The Great Mississippi Flood. The Moon Landing. Chernobyl. Each event is a lens through which every subject becomes newly visible.</p>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-n">02</div>
-        <div>
-          <div class="step-title">Explore every subject</div>
-          <p class="step-body">Work through History, Geography, English, Science, Maths and Ethics &mdash; each revealing a different dimension of the same event. AI responds to every answer individually, pushing thinking deeper, rewarding genuine understanding over surface recall.</p>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-n">03</div>
-        <div>
-          <div class="step-title">Earn your Ripple Score&trade;</div>
-          <p class="step-body">At the end, receive a Ripple Score across all six subjects. Needs More. Good Thinking. Strong Answer. Ripple. Deep Ripple. Brilliant. The score measures not what you know &mdash; but how you think. Teachers see every result in real time.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+<section id="how">
+  <div class="section-inner">
+    <div class="section-tag reveal">How it works</div>
+    <h2 class="section-h reveal">Four steps.<br><em>One idea at a time.</em></h2>
 
-<!-- AUDIENCES -->
-<hr class="rule">
-<div id="audiences">
-  <div class="sw">
-    <p class="eyebrow">Who It's For</p>
-    <h2 class="sh">Built for students. Designed for teachers. Evidenced for leaders.</h2>
-    <div class="aud-grid">
-      <div class="aud-card">
-        <div class="aud-who">For Students</div>
-        <div class="aud-title">The moment everything clicks.</div>
-        <p class="aud-body">Most students have never been shown that the subjects they study are describing the same world. Mundi is the first time that changes. History, Geography, English, Science &mdash; all pointing at the same event. The moment a student sees the connection for themselves is the moment education starts to make sense.</p>
-        <div class="aud-says">What students say:
-          <span>"I never knew these were the same thing."</span>
+    <div class="how-steps reveal">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <div class="step-title">Tell us how you think</div>
+          <div class="step-body">Two quick questions — how do you prefer to engage with ideas, and what do you want from the experience. <strong>Mundi shapes your content around your answers.</strong> Auditory learners get speeches and music. Data thinkers get charts and evidence. People who learn by arguing get a provocation to push back on.</div>
         </div>
       </div>
-      <div class="aud-card">
-        <div class="aud-who">For Teachers &amp; HODs</div>
-        <div class="aud-title">The data you always wanted but couldn't get.</div>
-        <p class="aud-body">You know which students are struggling in your subject. What you've never known is whether they struggle to connect knowledge across subjects &mdash; or whether they're actually brilliant at it. The Ripple Dashboard gives you that picture. And you didn't have to prepare a single lesson or mark a single answer to get it.</p>
-        <div class="aud-says">What teachers say:
-          <span>"I've never had data like this before."</span>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <div class="step-title">Choose a question — not a topic</div>
+          <div class="step-body">Mundi doesn't teach "Brexit" or "the 2008 crash." It asks: <strong>Did 52% of Britain make a mistake — or did the other 48% misunderstand something important?</strong> The question has a personal stake. That's on purpose.</div>
         </div>
       </div>
-      <div class="aud-card">
-        <div class="aud-who">For MAT &amp; School Leaders</div>
-        <div class="aud-title">Curriculum intent you can actually evidence.</div>
-        <p class="aud-body">Every school says they develop the whole student. Almost none can prove it. The Ripple Score&trade; is the first cross-curricular data product built specifically for schools &mdash; tracking how well students connect knowledge across subjects, at scale, across every year group. It turns your enrichment spend into measurable impact.</p>
-        <div class="aud-says">What leaders say:
-          <span>"This is exactly what Ofsted is looking for."</span>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-title">Pick your lenses</div>
+          <div class="step-body">Each question can be seen through multiple disciplines — economics, history, geography, philosophy, art, science and more. <strong>Choose 3 to 5.</strong> The ones that feel most interesting — or most unfamiliar. Mundi recommends which to try based on your Lens Map.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <div class="step-title">Submit your thinking. Get challenged.</div>
+          <div class="step-body">Engage with the evidence. Write your analysis. Then: <strong>before you get AI feedback, Mundi shows you the steelman of the opposing view</strong> and asks if it changes anything. This is the anti-polarisation mechanic made explicit. Your Ripple Score and Lens Map update with every session.</div>
         </div>
       </div>
     </div>
   </div>
-</div>
+</section>
 
-<!-- MISSION -->
-<hr class="rule">
-<div id="mission">
-  <div class="sw">
-    <div class="mission-layout">
-      <div>
-        <p class="eyebrow">The Mission</p>
-        <h2 class="sh">Built by someone who was in the room.</h2>
-        <p class="sb">I'm Giorgio Leonard. I've worked in EdTech at two hypergrowth startups. I've worked as a Teaching Assistant in schools. I watched students sit in History and wonder what the point was.</p>
-        <p class="sb">The problem isn't the students. The problem isn't even the teachers. The problem is a curriculum architecture that keeps subjects in separate boxes and never asks what happens when you take the walls down.</p>
-        <p class="sb">Mundi is the product I wished had existed. One event, every subject, real understanding. For every student who ever asked "when will I ever need to know this?" &mdash; this is the answer.</p>
+<!-- QUESTIONS -->
+<section class="questions" id="questions">
+  <div class="section-inner">
+    <div class="section-tag reveal">The questions</div>
+    <h2 class="section-h reveal">Questions worth<br><em>sitting with.</em></h2>
+    <p class="section-body reveal">We don't cover everything. We cover the questions that reward the most thinking — the ones that look different depending on where you're standing.</p>
+
+    <div class="q-grid reveal">
+      <div class="q-card active-card">
+        <div class="live-dot">Live now</div>
+        <div class="q-topic">Brexit · United Kingdom · 2016</div>
+        <div class="q-text">Did 52% of Britain make a mistake — or did the other 48% misunderstand something important?</div>
+        <div class="q-lenses">
+          <span class="q-lens">📊 Economist</span><span class="q-lens">🏛️ Historian</span>
+          <span class="q-lens">🌍 Geographer</span><span class="q-lens">🎵 Artist</span><span class="q-lens">🧠 Philosopher</span>
+        </div>
       </div>
-      <div>
-        <blockquote class="pull">
-          "Subjects are kept separate with nothing drawing lines between them.<br><br>
-          Mundi draws the lines."
-        </blockquote>
-        <p class="attr">&mdash; Giorgio Leonard, Founder</p>
+      <div class="q-card">
+        <div class="q-topic" style="color:var(--slate);">Coming soon · 2008 Financial Crisis</div>
+        <div class="q-text">The people who caused the last crash got richer. Nobody went to prison. Should you be angrier than you are?</div>
+        <div class="q-lenses"><span class="q-lens">📊 Economist</span><span class="q-lens">⚖️ Political Scientist</span><span class="q-lens">🧠 Philosopher</span></div>
+      </div>
+      <div class="q-card">
+        <div class="q-topic" style="color:var(--slate);">Coming soon · Punk 1976–1979</div>
+        <div class="q-text">Did punk change anything — or does capitalism always win in the end?</div>
+        <div class="q-lenses"><span class="q-lens">🎵 Artist</span><span class="q-lens">🏛️ Historian</span><span class="q-lens">📊 Economist</span></div>
+      </div>
+      <div class="q-card">
+        <div class="q-topic" style="color:var(--slate);">Coming soon · Nutrition Science</div>
+        <div class="q-text">Governments told us fat was killing us for 50 years. They were wrong. Should that change how much you trust official advice?</div>
+        <div class="q-lenses"><span class="q-lens">🔬 Scientist</span><span class="q-lens">📊 Economist</span><span class="q-lens">🧠 Philosopher</span></div>
       </div>
     </div>
   </div>
-</div>
+</section>
+
+<!-- LENSES -->
+<section id="lenses">
+  <div class="section-inner">
+    <div class="section-tag reveal">The lenses</div>
+    <h2 class="section-h reveal">Ten ways of seeing.<br><em>Most people use one.</em></h2>
+    <p class="section-body reveal">Each lens is a discipline — a different set of questions, tools, and evidence. The more lenses you develop, the harder it becomes to hold a simple view of a complicated world. That's the point.</p>
+    <div class="lenses-grid reveal">
+      <div class="lens-tile"><span class="lens-tile-ico">📊</span><div class="lens-tile-nm">The Economist</div><div class="lens-tile-q">"What are the incentives — and who's paying?"</div></div>
+      <div class="lens-tile"><span class="lens-tile-ico">🏛️</span><div class="lens-tile-nm">The Historian</div><div class="lens-tile-q">"What patterns from the past are we still inside?"</div></div>
+      <div class="lens-tile"><span class="lens-tile-ico">🌍</span><div class="lens-tile-nm">The Geographer</div><div class="lens-tile-q">"Where does this happen — and why there?"</div></div>
+      <div class="lens-tile"><span class="lens-tile-ico">🎵</span><div class="lens-tile-nm">The Artist</div><div class="lens-tile-q">"What did culture say that politics couldn't?"</div></div>
+      <div class="lens-tile"><span class="lens-tile-ico">🧠</span><div class="lens-tile-nm">The Philosopher</div><div class="lens-tile-q">"What values are actually in conflict here?"</div></div>
+      <div class="lens-tile"><span class="lens-tile-ico">🔬</span><div class="lens-tile-nm">The Scientist</div><div class="lens-tile-q">"How do we know what we know — and who decides?"</div></div>
+      <div class="lens-tile"><span class="lens-tile-ico">🧑‍🤝‍🧑</span><div class="lens-tile-nm">The Sociologist</div><div class="lens-tile-q">"How do groups form, fracture, define themselves?"</div></div>
+      <div class="lens-tile"><span class="lens-tile-ico">📰</span><div class="lens-tile-nm">The Journalist</div><div class="lens-tile-q">"Whose voices are missing from this story?"</div></div>
+      <div class="lens-tile"><span class="lens-tile-ico">⚖️</span><div class="lens-tile-nm">The Political Scientist</div><div class="lens-tile-q">"How do decisions actually get made?"</div></div>
+      <div class="lens-tile"><span class="lens-tile-ico">🧬</span><div class="lens-tile-nm">The Psychologist</div><div class="lens-tile-q">"How do humans actually behave vs. how we think they do?"</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- RIPPLE SCORE -->
+<section class="score-section">
+  <div class="section-inner">
+    <div class="section-tag reveal">Your Ripple Score</div>
+    <h2 class="section-h reveal">A map of<br><em>how you think.</em></h2>
+    <div class="score-inner-grid reveal">
+      <div class="score-points">
+        <div class="score-point">
+          <div class="score-point-ico">🗺</div>
+          <div class="score-point-txt"><strong>Your Lens Map builds over time</strong><span>Every session adds to a visual portrait of your intellectual range — which disciplines you reach for naturally, and which you've never tried.</span></div>
+        </div>
+        <div class="score-point">
+          <div class="score-point-ico">⚡</div>
+          <div class="score-point-txt"><strong>It shows you your blind spots</strong><span>The map makes it obvious which lenses you avoid. Mundi recommends exactly which module would stretch them most.</span></div>
+        </div>
+        <div class="score-point">
+          <div class="score-point-ico">🔄</div>
+          <div class="score-point-txt"><strong>It changes what you're recommended</strong><span>Mundi doesn't show you more of what you like. It shows you what your map is missing.</span></div>
+        </div>
+        <div class="score-point">
+          <div class="score-point-ico">🎯</div>
+          <div class="score-point-txt"><strong>It's a mirror, not a grade</strong><span>There's no right score. The point is to see yourself clearly — and decide if you want to think differently.</span></div>
+        </div>
+      </div>
+      <div class="score-graphic">
+        <svg width="280" height="280" viewBox="0 0 280 280" id="landing-radar"></svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOR WHO -->
+<section class="for-who">
+  <div class="section-inner">
+    <div class="section-tag reveal">Who it's for</div>
+    <h2 class="section-h reveal">Curious adults.<br><em>Full stop.</em></h2>
+    <div class="who-grid reveal">
+      <div class="who-card">
+        <div class="who-ico">📚</div>
+        <div class="who-ttl">The self-taught</div>
+        <div class="who-body">You read widely but feel like you're missing a framework for thinking about what you read. Mundi gives you the disciplines — not the answers.</div>
+      </div>
+      <div class="who-card">
+        <div class="who-ico">🗞</div>
+        <div class="who-ttl">The news-fatigued</div>
+        <div class="who-body">You want to understand the world, not just stay current with it. The news tells you what happened. Mundi teaches you how to think about why.</div>
+      </div>
+      <div class="who-card">
+        <div class="who-ico">🌀</div>
+        <div class="who-ttl">The opinion-curious</div>
+        <div class="who-body">You have views — strong ones. But you're honest enough to wonder if you've really stress-tested them. Mundi is built for that moment.</div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- CTA -->
-<hr class="rule">
-<div id="prototype">
-  <div class="cta-layout">
-    <div>
-      <p class="eyebrow">Live Prototype</p>
-      <h2 class="cta-hed">
-        It's already<br><em>built.</em><br>Go try it.
-      </h2>
+<section class="cta-section" id="waitlist">
+  <div class="cta-inner">
+    <div class="section-tag reveal" style="justify-content:center;margin-bottom:24px;">Early access</div>
+    <h2 class="cta-h reveal">Ready to think<br><em>differently?</em></h2>
+    <p class="cta-sub reveal">Mundi is in prototype. Join the waitlist and we'll let you in first — plus send you one question a week to think about in the meantime.</p>
+    <div class="email-form reveal">
+      <input type="email" placeholder="your@email.com" id="email-input">
+      <button onclick="handleSignup()">Join the waitlist</button>
     </div>
-    <div>
-      <p class="sb" style="max-width:100%; margin-bottom:0.75rem; font-size:1.1rem; color:var(--white);">The Great Mississippi Flood. 1927. Six subjects. Real AI. A Ripple Score at the end.</p>
-      <p class="sb" style="max-width:100%; margin-bottom:2.5rem;">This is not a concept. Not a pitch deck. Not a beta waiting list. It is a fully working Ripple Module you can sit down and do right now &mdash; the same experience a student in a school would have. Twenty minutes. No account. No credit card. Just go.</p>
-      <a href="https://mundi-prototype.vercel.app/" target="_blank" class="btn-large">Enter the Mississippi Flood Module &rarr;</a>
-      <ul class="cta-points">
-        <li>You'll understand the 1927 Mississippi Flood better than you do now</li>
-        <li>You'll see exactly how Ripple Learning works in practice</li>
-        <li>You'll get a real Ripple Score across all six subjects</li>
-        <li>Free. No account. Takes around 20 minutes.</li>
-      </ul>
-    </div>
+    <p class="form-note reveal" id="form-msg">No spam. Just questions worth thinking about.</p>
   </div>
-</div>
+</section>
 
 <!-- FOOTER -->
-<hr class="rule">
 <footer>
-  <div class="footer-logo">
-    <span class="m">Mundi</span>
-    <span class="e">Education</span>
-  </div>
-  <ul class="footer-links">
-    <li><a href="#ripple">The Platform</a></li>
-    <li><a href="#mission">The Mission</a></li>
-    <li><a href="#audiences">Who It's For</a></li>
-    <li><a href="https://mundi-prototype.vercel.app/" target="_blank">The Prototype</a></li>
-  </ul>
-  <div class="footer-right">
-    <a href="mailto:hello@mundi.education">hello@mundi.education</a><br>
-    <a href="https://mundi.education">mundi.education</a>
-  </div>
-  <p class="footer-copy">&copy; 2026 Mundi Education &nbsp;&middot;&nbsp; Ripple Learning&trade; and Ripple Score&trade; are trademarks of Mundi Education</p>
+  <div class="footer-logo">MUN<span>D</span>I</div>
+  <div class="footer-note">Think harder. See further. Know yourself.</div>
+  <div class="footer-note">© 2026 Mundi Education</div>
 </footer>
 
+<script>
+// ── NAV SCROLL ──
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').classList.toggle('scrolled',window.scrollY>40);
+});
+
+// ── REVEAL ON SCROLL ──
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting) e.target.classList.add('in');});
+},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+// ── QUESTION TICKER ──
+const questions=[
+  "Did 52% of Britain make a mistake — or did the other 48% misunderstand something important?",
+  "The people who caused the last crash got richer. Should you be angrier than you are?",
+  "Did punk change anything — or does capitalism always win in the end?",
+  "Governments told us fat was killing us for 50 years. They were wrong. What else might they be wrong about?",
+  "Is the city you live in designed for you — or against you?",
+  "Did social media make you more yourself — or less?",
+];
+let qi=0;
+function rotateTicker(){
+  const el=document.getElementById('ticker');
+  el.style.animation='none';
+  void el.offsetWidth;
+  el.textContent=questions[qi%questions.length];
+  el.style.animation='tickerFade 6s ease-in-out infinite';
+  qi++;
+}
+rotateTicker();
+setInterval(rotateTicker,6000);
+
+// ── LANDING RADAR ──
+(function buildLandingRadar(){
+  const svg=document.getElementById('landing-radar');
+  const cx=140,cy=140,r=100;
+  const lenses=[
+    {ico:'📊',val:.9,col:'#14B8A6'},
+    {ico:'🏛️',val:.75,col:'#7C3AED'},
+    {ico:'🌍',val:.4,col:'#0B7A75'},
+    {ico:'🎵',val:.2,col:'#D97706'},
+    {ico:'🧠',val:.65,col:'#6366F1'},
+    {ico:'🔬',val:.5,col:'#059669'},
+    {ico:'🧑‍🤝‍🧑',val:.3,col:'#F59E0B'},
+    {ico:'📰',val:.45,col:'#DC2626'},
+  ];
+  const n=lenses.length;
+
+  // Grid circles
+  [.25,.5,.75,1].forEach(f=>{
+    const c=document.createElementNS('http://www.w3.org/2000/svg','circle');
+    c.setAttribute('cx',cx);c.setAttribute('cy',cy);c.setAttribute('r',r*f);
+    c.setAttribute('fill','none');c.setAttribute('stroke','rgba(255,255,255,0.05)');c.setAttribute('stroke-width','1');
+    svg.appendChild(c);
+  });
+
+  const pts=[];
+  lenses.forEach((l,i)=>{
+    const angle=(Math.PI*2/n)*i-Math.PI/2;
+    const fillR=r*.1+r*.9*l.val;
+    const ax=cx+r*Math.cos(angle);
+    const ay=cy+r*Math.sin(angle);
+    pts.push({x:cx+fillR*Math.cos(angle),y:cy+fillR*Math.sin(angle)});
+
+    const line=document.createElementNS('http://www.w3.org/2000/svg','line');
+    line.setAttribute('x1',cx);line.setAttribute('y1',cy);
+    line.setAttribute('x2',ax);line.setAttribute('y2',ay);
+    line.setAttribute('stroke','rgba(255,255,255,0.06)');line.setAttribute('stroke-width','1');
+    svg.appendChild(line);
+
+    const dot=document.createElementNS('http://www.w3.org/2000/svg','circle');
+    dot.setAttribute('cx',ax);dot.setAttribute('cy',ay);dot.setAttribute('r','5');
+    dot.setAttribute('fill',l.col);
+    svg.appendChild(dot);
+
+    const lx=cx+(r+20)*Math.cos(angle);
+    const ly=cy+(r+20)*Math.sin(angle);
+    const txt=document.createElementNS('http://www.w3.org/2000/svg','text');
+    txt.setAttribute('x',lx);txt.setAttribute('y',ly);
+    txt.setAttribute('text-anchor','middle');txt.setAttribute('dominant-baseline','middle');
+    txt.setAttribute('font-size','16');txt.textContent=l.ico;
+    svg.appendChild(txt);
+  });
+
+  const poly=document.createElementNS('http://www.w3.org/2000/svg','polygon');
+  poly.setAttribute('points',pts.map(p=>p.x+','+p.y).join(' '));
+  poly.setAttribute('fill','rgba(20,184,166,.15)');
+  poly.setAttribute('stroke','rgba(20,184,166,.6)');
+  poly.setAttribute('stroke-width','1.5');
+  svg.insertBefore(poly,svg.childNodes[4]||svg.firstChild);
+})();
+
+// ── SIGNUP ──
+function handleSignup(){
+  const v=document.getElementById('email-input').value.trim();
+  const msg=document.getElementById('form-msg');
+  if(!v||!v.includes('@')){
+    document.getElementById('email-input').style.borderColor='rgba(220,38,38,.5)';
+    setTimeout(()=>document.getElementById('email-input').style.borderColor='',1500);
+    return;
+  }
+  document.querySelector('.email-form').innerHTML=
+    '<p style="font-size:16px;font-weight:700;color:var(--tealb);">✓ You\'re on the list.</p>';
+  msg.textContent='We\'ll be in touch. In the meantime — try the prototype.';
+}
+</script>
 </body>
-</html>
+
+</body>
